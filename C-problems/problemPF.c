@@ -28,7 +28,7 @@ __uint128_t powmod(__uint128_t n, __uint128_t p, __uint128_t mod)
 int check(__uint128_t n)
 {
     int count = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 300; i++)
     {
         __uint128_t x = rand();
         if (powmod(x, n - 1, n) % n == 1 && gcd(x, n) == 1)
@@ -36,7 +36,7 @@ int check(__uint128_t n)
             count++;
         }
     }
-    if (count >= 100) return 1;
+    if (count >= 100) return count;
     return 0;
 }
 
@@ -47,7 +47,8 @@ unsigned long long solve(__uint128_t a, __uint128_t b)
     while (f2 * a + f1 * b <= UINT64_MAX / (2 * 2 * 2 * 2))
     {
         __uint128_t temp = f2 * a + f1 * b;
-        if (check(temp) == 1)
+        int x = check(temp);
+        if (x)
         {
             ans = temp;
             //printf("%llu%s", temp, "\n");
@@ -65,7 +66,6 @@ int main()
     assert(sc == 2);
     assert(0ull < a && a < 256ull);
     assert(0ull < b && b < 256ull);
-    if (gcd(a, b) != 1) printf("%d", 0);
-    else printf("%llu", solve(a, b));
+    printf("%llu", solve(a, b));
     //printf("%d", check(1000000007));
 }
