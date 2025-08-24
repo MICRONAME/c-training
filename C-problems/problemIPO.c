@@ -25,17 +25,17 @@ struct tree_t* generate()
     struct tree_t* top = calloc(1, sizeof(struct tree_t));
     top->left = calloc(1, sizeof(struct tree_t));
     top->right = calloc(1, sizeof(struct tree_t));
-    top->left->left = calloc(1, sizeof(struct tree_t));
-    top->left->right = calloc(1, sizeof(struct tree_t));
-    top->left->right->left = calloc(1, sizeof(struct tree_t));
-    top->left->right->right = calloc(1, sizeof(struct tree_t));
+    //top->left->left = calloc(1, sizeof(struct tree_t));
+    //top->left->right = calloc(1, sizeof(struct tree_t));
+    //top->left->right->left = calloc(1, sizeof(struct tree_t));
+    //top->left->right->right = calloc(1, sizeof(struct tree_t));
     top->data = 0;
     top->left->data = 1;
     top->right->data = 2;
-    top->left->left->data = 3;
-    top->left->right->data = 4;
-    top->left->right->left->data = 5;
-    top->left->right->right->data = 6;
+    //top->left->left->data = 3;
+    //top->left->right->data = 4;
+    //top->left->right->left->data = 5;
+    //top->left->right->right->data = 6;
     return top;
 }
 

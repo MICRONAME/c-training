@@ -11,13 +11,51 @@ struct tree_t
     int data;
 };
 
-
+struct stack_node
+{
+    struct stack_node *next;
+    struct tree_t *data;
+};
+#if 0
+struct stack_node* pop(struct stack_node *top)
+{
+    if (top == NULL) return top;
+    top = top->next;
+    return top;
+}
+#endif
 //via iterative tools
 void print_pre(struct tree_t *top) {
     // TODO: ваш код здесь
     if (top == NULL) return;
-    printf("%d", top->data);
-    for ()
+
+    struct stack_node *stack = calloc(1, sizeof(struct stack_node));
+    stack->data = top;
+    stack->next = NULL;
+
+    while (stack != NULL) {
+        struct tree_t *current = stack->data;
+        printf("%d ", current->data);
+
+        struct stack_node *next_node = stack->next;
+
+        free(stack);
+        stack = next_node;
+
+        if (current->right != NULL) {
+            struct stack_node *right_node = calloc(1, sizeof(struct stack_node));
+            right_node->data = current->right;
+            right_node->next = stack;
+            stack = right_node;
+        }
+
+        if (current->left != NULL) {
+            struct stack_node *left_node = calloc(1, sizeof(struct stack_node));
+            left_node->data = current->left;
+            left_node->next = stack;
+            stack = left_node;
+        }
+    }
 }
 
 struct tree_t* generate()
@@ -25,17 +63,17 @@ struct tree_t* generate()
     struct tree_t* top = calloc(1, sizeof(struct tree_t));
     top->left = calloc(1, sizeof(struct tree_t));
     top->right = calloc(1, sizeof(struct tree_t));
-    top->left->left = calloc(1, sizeof(struct tree_t));
-    top->left->right = calloc(1, sizeof(struct tree_t));
-    top->left->right->left = calloc(1, sizeof(struct tree_t));
-    top->left->right->right = calloc(1, sizeof(struct tree_t));
+    top->right->left = calloc(1, sizeof(struct tree_t));
+    top->right->right = calloc(1, sizeof(struct tree_t));
+    top->right->right->left = calloc(1, sizeof(struct tree_t));
+    top->right->right->right = calloc(1, sizeof(struct tree_t));
     top->data = 0;
     top->left->data = 1;
     top->right->data = 2;
-    top->left->left->data = 3;
-    top->left->right->data = 4;
-    top->left->right->left->data = 5;
-    top->left->right->right->data = 6;
+    top->right->left->data = 3;
+    top->right->right->data = 4;
+    top->right->right->left->data = 5;
+    top->right->right->right->data = 6;
     return top;
 }
 
